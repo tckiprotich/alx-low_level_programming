@@ -1,4 +1,4 @@
-#include <studio.h>
+#include <stdio.h>
 /* "Programming is like building a multilingual puzzle */
 
 int main(void)
