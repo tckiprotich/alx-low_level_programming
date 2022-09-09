@@ -5,7 +5,7 @@
  * Return: Aways 0 (Sucess)
  */
 int main(void)
-{  
+{
 char ch = 'a';
 while (ch <= 'z')
 {
