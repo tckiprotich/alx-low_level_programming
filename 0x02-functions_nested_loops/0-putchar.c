@@ -1,4 +1,4 @@
-<include "0-putchar.h"
+#include <stdio.h>
  /*
   *main - prnts 0-putchar.c the end with new line
   *return -returns zero always
