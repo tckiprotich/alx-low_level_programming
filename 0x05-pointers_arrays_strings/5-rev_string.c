@@ -4,8 +4,6 @@
  * @s: holi
  *
  */
-<<<<<<< HEAD
-
 void rev_string(char *s)
   
 {
