@@ -1,42 +1,57 @@
 #include <stdio.h>
-
-#include <stdlib.h>
 #include "main.h"
-/**
- * main - random password generator for 101-crackme
- *
- * Return: always 0
- */
-int main(void)
-{
-  int i, j, k, s;
-  char c[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  char p[58];
+int string_length(char *s);
 
-  srand(time(NULL));
-  while (s != 2772)
+/**
+ * rev_string - Function that reverses a string.
+ * @s: Pointer to the string to be reversed.
+ *
+ * Return: No return.
+ */
+
+void rev_string(char *s)
+{
+  int len, i;
+  char *begin, *end, temp;
+
+  len = string_length(s); /* Get function from the string_length.c */
+  begin = s;
+  end = s;
+
+  for (i = 0; i < len - 1; i++)
+    end++;
+
+  for (i = 0; i < len / 2; i++)
     {
-      i = k = s = 0;
-      while ((2772 - 122) > s)
-	{
-	  j = rand() % 62;
-	  p[i] = c[j];
-	  s += c[j];
-	  i++;
-	}
-      while (c[k])
-	{
-	  if (c[k] == (2772 - s))
-	    {
-	      p[i] = c[k];
-	      s += c[k];
-	      i++;
-	      break;
-	    }
-	  k++;
-	}
+      /**
+       * The idea is to swap the beginning and end pointers
+       * of the string. Instead of swapping the elements, here,
+       * we will swap the pointers where the addresses of the
+       * input string are stored.
+       */
+
+      temp   = *end;
+      *end   = *begin;
+      *begin = temp;
+
+      begin++;
+      end--;
     }
-  p[i] = '\0';
-  printf("%s", p);
-  return (0);
+}
+
+/**
+ * string_length - Function that returns string length.
+ * @s: Pointer to the string return length.
+ *
+ * Return: The length of the string.
+ */
+
+int string_length(char *s)
+{
+  int length = 0;
+
+  while (*(s + length) != '\0')
+    length++;
+
+  return (length);
 }
