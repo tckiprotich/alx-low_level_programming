@@ -1,31 +1,39 @@
-#include "main.h"
+#include <main.h>
 /**
- * rev_string - reverses a string
- * @s: holi
+ * main - random password generator for 101-crackme
  *
+ * Return: always 0
  */
-void rev_string(char *s)
+int main(void)
 {
-	int i;
-	int j;
-	int temp;
-	int length;
+	int i, j, k, s;
+	char c[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char p[58];
 
-	while (s[i] != 0)
+	srand(time(NULL));
+	while (s != 2772)
 	{
-		i++;
+		i = k = s = 0;
+		while ((2772 - 122) > s)
+		{
+			j = rand() % 62;
+			p[i] = c[j];
+			s += c[j];
+			i++;
+		}
+		while (c[k])
+		{
+			if (c[k] == (2772 - s))
+			{
+				p[i] = c[k];
+				s += c[k];
+				i++;
+				break;
+			}
+			k++;
+		}
 	}
-
-	length = i;
-	i = 0;
-	j = length - 1;
-
-	while (i < j)
-	{
-		temp = s[i];
-		s[i] = s[j];
-		s[j] = temp;
-		i++;
-		j--;
-	}
+	p[i] = '\0';
+	printf("%s", p);
+	return (0);
 }
