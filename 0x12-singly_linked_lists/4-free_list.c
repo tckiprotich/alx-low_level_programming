@@ -1,15 +1,20 @@
+#include <stdlib.h>
+#include <string.h>
 #include "lists.h"
+
 /**
- * free_list - frees a list
- * @head: head of the linked list
- *
+ * free_list - function that frees a list_t list
+ * @head: Const double pointer of structure list_t for beginning
+ * Return: Void
  */
+
 void free_list(list_t *head)
 {
-	if (head != NULL)
+	list_t *temp;
+
+	for (temp = head; temp != NULL; temp = temp->next)
 	{
-		free(head->str);
-		free_list(head->next);
+		free(temp->str);
+		free(temp);
 	}
-	free(head);
 }
