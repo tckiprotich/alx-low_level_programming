@@ -1,49 +1,46 @@
-#include "holberton.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
 
 /**
- * read_textfile - function that reads a text file and prints it to the POSIX
- * standard output
- * @filename: Const char for name of file to be printed
- * @letters: Size_t for number of bytes to be printed
- * Return: Bytes read, 0 if error reading or writing to std output
+ * read_textfile - prints text from a file
+ *
+ * @filename: name of the file
+ * @letters: number of characters to read
+ *
+ * Return: actual number of letters read, 0 if end of file
  */
-
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd;
-	ssize_t  n_read, n_write;
+	int file;
+	int length, wrotechars;
 	char *buf;
 
-	buf = malloc(sizeof(char) * (letters + 1));
-
+	if (filename == NULL || letters == 0)
+		return (0);
+	buf = malloc(sizeof(char) * (letters));
 	if (buf == NULL)
 		return (0);
 
-	fd = open(filename, O_RDONLY);
-
-	if (fd == -1 || filename == NULL)
+	file = open(filename, O_RDONLY);
+	if (file == -1)
 	{
 		free(buf);
 		return (0);
 	}
-
-	n_read = read(fd, buf, letters);
-
-	if (n_read < 0)
+	length = read(file, buf, letters);
+	if (length == -1)
 	{
 		free(buf);
+		close(file);
 		return (0);
 	}
 
-	n_write = write(STDOUT_FILENO, buf, n_read);
+	wrotechars = write(STDOUT_FILENO, buf, length);
 
-	if (n_write < 0)
-	{
-		free(buf);
-		return (0);
-	}
-
-	close(fd);
 	free(buf);
-	return (n_read);
+	close(file);
+	if (wrotechars != length)
+		return (0);
+	return (length);
 }
